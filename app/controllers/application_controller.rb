@@ -32,6 +32,7 @@ class ApplicationController < ActionController::Base
   		  #{res['poa']['vtc']},#{res['poa']['subdist']},#{res['poa']['dist']},#{res['poa']['state']},#{res['poa']['pc']}."
   		}
   		@user = User.create(details)
+      Wallet.create(:owner_id => @user.id, :type => 'individual', :balance => 0) if @user
   	end
   	redirect_to "/user/#{@user.id}"
   end
