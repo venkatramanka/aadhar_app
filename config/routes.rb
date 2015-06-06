@@ -1,5 +1,5 @@
 AadharApp::Application.routes.draw do
-  get "users/signup"
+  match "user/:id" => "users#show"
 
   get "users/index"
 
@@ -54,11 +54,36 @@ AadharApp::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'home#index'
   match '/login' => 'application#login', :as => "login"
-  match '/singup' => 'application#signup', :as => "registration"
+  match '/signup' => 'application#signup', :as => "registration"
+  match '/dispatch-otp' => 'application#dispatch_otp', :as => "dispatch_otp"
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
+#myAadhaar : 900536202162
+# https://ac.khoslalabs.com/hackgate/hackathon/otp
+#   {"aadhaar-id":"900536202162","channel":"SMS", "location":{"type":"pincode", "pincode":"666666" }}
+
+# https://ac.khoslalabs.com/hackgate/hackathon/kyc/raw
+# {
+#   "consent": "Y",
+#   "auth-capture-request": {
+#     "aadhaar-id": "900536202162",
+#     "modality": "otp",
+#     "otp": "352959",
+#     "certificate-type": "preprod",
+#     "device-id": "public",
+#     "location":{
+#       "type":"pincode", 
+#       "pincode":"620021"
+#   }
+# }
+# }
+ #x = agent.post("https://ac.khoslalabs.com/hackgate/hackathon/otp",{"aadhaar-id" => "900536202162","channel" => "SMS", "location" => {"type" => "pincode", "pincode" => "666666" }}.to_json,{'Content-Type' => 'application/json'})
+
+#agent.post("https://ac.khoslalabs.com/hackgate/hackathon/kyc/raw",{"consent" => "Y", "auth-capture-request" => {"aadhaar-id" => "900536202162","modality" => "otp","otp" => "352959","certificate-type" => "preprod","device-id" => "public","location" => {"type" => "pincode","pincode" => "620021"}}}.to_json,{'Content-Type' => 'application/json'})
+# } )
 end

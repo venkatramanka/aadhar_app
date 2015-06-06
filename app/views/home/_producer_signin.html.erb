@@ -1,6 +1,7 @@
 <script>
 $(document).ready(function(){
   $('#signup_form').hide();
+  $('#aadhaar_form').hide();
   $('#signin_link').hide();
 });
 </script>
@@ -23,13 +24,24 @@ $(document).ready(function(){
             <%= f.submit 'Sign in', :class => 'btn btn-primary col-md-offset-4 col-md-4' %>
           <% end %>
         </div>
-        <div id="signup_form" class="row">
-          <%= form_for(:user, url: registration_path(:user), :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+        <div id="aadhaar_form" class="row">
+          <%= form_for(:user, url: dispatch_otp_path, :remote => true, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
             <div class="field">
-              <%= f.text_field :name, :class => 'form-control', :placeholder => "Enter your Full Name" %><br/>
+              <%= f.text_field :aadhaar_number, :class => 'form-control', :placeholder => "Enter your Aadhaar number" %><br/>
             </div>
+            <div class="actions">
+              <%= f.submit "Submit", :class => 'btn btn-primary col-md-offset-4 col-md-4', :id => 'aadhaar_submit' %>
+            </div>
+          <% end %>
+        </div>
+        <div id="signup_form" class="row">
+          <%= form_for(:user, url: registration_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
             <div class="field">
-              <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Enter your email' %><br/>
+              <%= f.text_field :otp, :class => 'form-control', :placeholder => "Enter your OTP" %><br/>
+            </div>
+            <%= f.hidden_field :hidden_aadhaar_number, :id => 'hidden_aadhaar_number' %>
+            <div class="field">
+              <%= f.text_field :pincode, autofocus: true, :class => 'form-control', :placeholder => 'Enter your pincode as recorded in your Aadhaar' %><br/>
             </div>
 
             <div class="field">
@@ -52,9 +64,16 @@ $(document).ready(function(){
       <div class="modal-footer">
         <!-- forgot password
         link_to "Forgot your password?", new_password_path(:user), :style => 'position:absolute;left:1vw; bottom:1vh;' -->
-        <%= link_to "New user? Signup", "#", :id => 'signup_link', :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#signin_form").hide(1000);$("#signup_form").show(1000);$("#form_type_text").text("Signup");$(this).hide();$("#signin_link").show()' %>
-        <%= link_to "Have an account? Signin", "#", :id => "signin_link", :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#signin_form").show(1000);$("#signup_form").hide(1000);$("#form_type_text").text("Signin");$(this).hide();$("#signup_link").show()' %>
+        <%= link_to "New user? Signup", "#", :id => 'signup_link', :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#signin_form").hide(1000);$("#aadhaar_form").show(1000);$("#form_type_text").text("Signup");$(this).hide();$("#signin_link").show()' %>
+        <%= link_to "Have an account? Signin", "#", :id => "signin_link", :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#signin_form").show(1000);$("#signup_form").hide(1000);$("#aadhaar_form").hide(1000);$("#form_type_text").text("Signin");$(this).hide();$("#signup_link").show()' %>
       </div>
   </div>
   </div>
 </div>
+<script>
+$('#aadhaar_submit').click(function(){
+  $('#hidden_aadhaar_number').val($('#user_aadhaar_number').val());
+  $('#aadhaar_form').hide(1000);
+  $('#signup_form').show(1000);
+});
+</script>

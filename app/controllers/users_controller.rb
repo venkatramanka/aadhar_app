@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  def signup
-  	@user = User.new
+  def show
+  	@user = User.find params[:id]
+  	render :text => "Hello #{@user.name}"
   end
 
   def index
