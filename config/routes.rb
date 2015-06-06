@@ -1,5 +1,6 @@
 AadharApp::Application.routes.draw do
-  match "user/:id" => "users#show"
+  resources :users, :only => [:update]
+  match "user/:id" => "users#show", as: "user"
 
   get "users/index"
 
