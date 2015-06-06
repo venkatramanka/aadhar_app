@@ -1,8 +1,12 @@
 .sb-left .container{
-  overflow: hidden
+  overflow: hidden;
 }
-
-#consumer_image:hover{
+#home_page{
+  background: url('crowd.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/*#consumer_image:hover{
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -25,7 +29,7 @@
   -webkit-box-shadow: 0 0 5vh 0 rgba(255, 255, 255, 1.67);
   -moz-box-shadow:    0 0 5vh 0 rgba(255, 255, 255, 1.67);
   box-shadow:         0 0 5vh 0 rgba(255, 255, 255, 1.67);
-}
+}*/
 .infobox_details{
   height:7em;
   width:15em;

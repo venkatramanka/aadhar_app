@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
 
 
   def login
-  	redirect_to root_path
+  	@user = User.find_by_aadhar_number(params["user"]["login_aadhaar_number"])
+    if @user.present? && @user.password == params["user"]["password"] 
+      redirect_to "/user/#{@user.id}"
+    else
+      redirect_to :back
+    end
   end
 
   def signup
