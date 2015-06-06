@@ -1,0 +1,48 @@
+<div class="container">
+<%= form_for(@user, url: "user/#{@user.id}", html: { method: 'PUT', class: 'form-horizontal', style: 'margin-top:10vh;' }) do |f| %>
+
+<div class=" col-md-offset-2 col-md-6">
+
+  <div class="form-group">
+    <%= f.label :aadhar_number, class: 'col-md-4 control-label'  %>
+    <div class="col-sm-8">
+        <%= f.text_field :aadhar_number, autofocus: true, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-4 control-label'  %>
+    <div class="col-md-8">
+      <%= f.text_field :name, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :mobile_number, class: 'col-md-4 control-label'  %>
+    <div class="col-md-8">
+      <%= f.text_field :mobile_number, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, class: 'col-md-4 control-label'  %>
+    <div class="col-md-8">
+      <%= f.email_field :email, class: 'form-control'  %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :dob, class: 'col-md-4 control-label'  %>
+    <div class="col-md-8">
+      <%= f.date_select :dob, class: 'form-control'  %>
+    </div>
+  </div>
+
+  	<div class="form-group">
+  	  <div class="col-md-offset-4 col-md-4">
+        <%= f.submit "Save  Profile", class: "btn btn-primary" %>
+      </div>
+    </div>
+</div>
+<%end%>
+</div>
