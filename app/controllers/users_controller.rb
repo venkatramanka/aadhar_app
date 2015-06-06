@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
   def show
   	@user = User.find params[:id]
+    @banks = File.open("#{Rails.root}/banks.txt","r").read.split(",")
   end
 
   def index
+  end
+
+  def form
+    @user = User.find params[:id]
   end
 
   def update

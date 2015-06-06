@@ -25,6 +25,7 @@ gem 'jquery-rails'
 gem 'gmaps4rails'
 gem 'devise'
 gem 'mechanize'
+gem 'gon'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -39,4 +40,4 @@ gem 'mechanize'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'

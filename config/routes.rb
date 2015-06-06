@@ -1,9 +1,9 @@
 AadharApp::Application.routes.draw do
   resources :users, :only => [:update]
+  match "users/form/:id" => "users#form"
   match "user/:id" => "users#show", as: "user"
 
   get "users/index"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

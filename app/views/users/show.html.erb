@@ -1,38 +1,44 @@
-  <%= form_for(@user, url: "#{@user.id}", html: { method: 'PUT', class: 'form-horizontal' }) do |f| %>
-
-  <div class="col-md-6">
-
-	  <div class="form-group">
-      <%= f.label :aadhar_number, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :aadhar_number, autofocus: true, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :name, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-          <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :dob, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.date_select :dob, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :address, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_area :address, rows:8, class: 'form-control', placeholder: '10 digits' %>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-1 col-sm-6">
-        <%= f.submit "Update  Profile", class: "btn btn-primary" %>
-      </div>
-    </div>
+<div id="user_dashboard">
+  <div class="alpha60">
+    <script>
+    $.colorbox({href:"/users/form/<%=@user.id%>", transition:"fade", closeButton:false, open:true, left:"1%",scrolling:false});
+    </script>
   </div>
-<%end%>
+</div>
+<nav class="navbar navbar-ct-blue navbar-fixed-top navbar-transparent" role="navigation" style="background-color:rgba(59,59,59,0.9)">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="pe-7s-credit"></i>
+                        <p>Account</p>
+              </a>
+            </li>
+            <li>
+                <a href="javascript:window.location='/'">
+                    <i class="pe-7s-power"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+<!--  end navbar -->
+<div id="payment_div">
+  <%= form_tag({}, {:method => :get}) do %>
+    <%= select_tag :banks, options_for_select(@banks) %>
+  <% end %>
+</div>
+<script>
+$('#payment_div').hide();
+</script>
