@@ -2,12 +2,29 @@
   <div class="container" style="width:100vw;height:100vh">
     <div class="col-md-offset-1 images_holder" style="padding-top:40vh;width:100%">
       <div class="col-md-4 col-xs-12">
-        <a href="#" onclick="$('#loginModal').modal('show');"><%=image_tag "man.png", style: "width:45%", id: "producer_image" %></a><br/><br/>
+        <div class="row">
+          <a href="#" onclick="$('#loginModal').modal('show');"><%=image_tag "consumer.png", style: "width:45%", id: "consumer_image" %></a><br/>
+        </div>
       </div>
       <div class="col-md-4 col-xs-12 col-md-offset-4">
-        <br/><a href="#" onclick="$('#StoreloginModal').modal('show');"><%= image_tag "shop.png", style: "width:45%", id: "consumer_image" %></a><br/>
+        <div class="row">
+        <a href="#" onclick="$('#StoreloginModal').modal('show');"><%= image_tag "producer.png", style: "width:45%", id: "producer_image" %></a><br/>
+        </div>
       </div>
     </div>
-    
+    <div class="row" style="position:absolute;bottom:1vh;width:100%">
+      <center><a href="#" onclick="$('#adminLoginModal').modal('show');"><%= image_tag "rajni.gif", style: "width:5%", id: 'admin_image' %></a><br/><span style="color:white">admin</span></center>
+    </div>
   </div>
 </div>
+<script>
+$('#consumer_image').powerTip({
+  placement: 'e'
+});
+$('#producer_image').powerTip({
+  placement: 'w'
+});
+$('#consumer_image').data('powertip', "<b><i>Individual Login</i></b><br/><ul><li>Create/Manage your personal Account</li><li>Add money to your wallet</li><li>Pay/Get paid</li></ul>");
+$('#producer_image').data('powertip', "<b><i>Stores Login</i></b><br/><ul><li>Create/Manage your store's Account</li><li>Analyze your transactions</li><li>Redeem when there's need</li></ul>");
+</script>
+

@@ -19,7 +19,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="dropdown" id='transfer_menu'>
               <a href="#" id="transfer_link" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="pe-7s-menu"></i>
                         <p>Transfer</p>
@@ -38,22 +38,28 @@
 <!--  end navbar -->
 </div>
 <script>
-        $(document).ready(function(){
-            $('#transfer_link').click( function() {
-                var myHref = "<%= transfer_path %>";
-                $.colorbox({
-                    width: "auto",
-                    height: "auto",
-                    //iframe: true,
-                    href: myHref,
-                    closeButton: false,
-                    overlayClose: false,
-                    opacity:1,
-                    scrolling: false
-                });
-            });
+
+$('#transfer_link').powerTip({
+  placement: 'sw'
+});
+$('#transfer_link').data('powertip', "<b><i>Transfer funds</i></b><br/><ul><li>Aadhaar-To-Aadhar money transfer</li><li>Pay anyone, anytime</li></ul>");
+$('#transfer_link').powertip('show');
+$(document).ready(function(){
+    $('#transfer_link').click( function() {
+        var myHref = "<%= transfer_path %>";
+        $.colorbox({
+            width: "auto",
+            height: "auto",
+            //iframe: true,
+            href: myHref,
+            closeButton: false,
+            overlayClose: false,
+            opacity:1,
+            scrolling: false
         });
-        $('#cbox').blur(function(el){
-          $(el).hide(1000);
-        });
+    });
+});
+$('#cbox').blur(function(el){
+  $(el).hide(1000);
+});
 </script>
