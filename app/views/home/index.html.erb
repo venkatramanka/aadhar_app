@@ -43,7 +43,6 @@ $('#transfer_link').powerTip({
   placement: 'sw'
 });
 $('#transfer_link').data('powertip', "<b><i>Transfer funds</i></b><br/><ul><li>Aadhaar-To-Aadhar money transfer</li><li>Pay anyone, anytime</li></ul>");
-$('#transfer_link').powertip('show');
 $(document).ready(function(){
     $('#transfer_link').click( function() {
         var myHref = "<%= transfer_path %>";
