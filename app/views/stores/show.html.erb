@@ -11,25 +11,26 @@
       <div class="col-sm-6">
         <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
       </div>
-
+    </div>
+      </br>
       <div class="form-group">
         <%= f.label :email, class: 'col-sm-2 control-label'  %>
         <div class="col-sm-6">
           <%= f.email_field :email, class: 'form-control'  %>
         </div>
       </div>
-
+      </br>
       <div class="form-group">
         <%= f.label :phone, class: 'col-sm-2 control-label'  %>
         <div class="col-sm-6">
           <%= f.text_field :phone, class: 'form-control', placeholder: '10 digits' %>
         </div>
       </div>
-
+    </br>
       <div class="form-group">
         <%= f.label :category, class: 'col-sm-2 control-label'  %>
         <div class="col-sm-6">
-          <%= f.collection_select :category_id, StoreCategory.all, :id, :name, {}, { multiple: true, class: 'form-control' } %>
+          <%= f.collection_select :category_id, [StoreCategory.new({:name => "None"})] + StoreCategory.all, :id, :name, {}, { multiple: false, class: 'form-control' } %>
         </div>
       </div>
 

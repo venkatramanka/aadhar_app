@@ -1,0 +1,64 @@
+<script>
+$(document).ready(function(){
+  $('#payment_form').hide();
+});
+</script>
+<div class="pageCenter">
+  <% if @message %>
+    <div class="<%= @class %>" role="alert"><%= @message %></div></br>
+  <% end %>
+  <div id="aadhaar_form" class="row">
+    <%= form_for(:user, url: dispatch_otp_path, :remote => true, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+      <div class="field">
+        <%= f.text_field :aadhaar_number, :class => 'form-control', :placeholder => "Enter your Aadhaar number" %><br/>
+      </div>
+      <div class="actions">
+        <%= f.submit "Request OTP", :class => 'btn btn-primary col-md-offset-4 col-md-4', :id => 'aadhaar_submit' %>
+      </div>
+    <% end %>
+  </div>
+  <div id="payment_form" class="row">
+    <%= form_for(:store, url: payment_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+      <div class="row">
+        <%= f.hidden_field :hidden_aadhaar_number, :id => 'hidden_aadhaar_number' %>
+        <%= label_tag :otp, "OTP:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-6">
+          <%= f.text_field :otp, :class => 'form-control', :placeholder => "Enter the OTP" %><br/>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <%= label_tag :pin, "Pin Code:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-6">
+          <%= f.text_field :pincode, autofocus: true, :class => 'form-control', :placeholder => 'Enter Customers Pincode' %><br/>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <%= label_tag :amount, "Bill Amount:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-6">
+          <%= f.text_field :amount, autofocus: true, :class => 'form-control', :placeholder => "Enter total bill amount" %>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <%= label_tag :remarks, "Remarks:", class: 'col-sm-2 control-label' %>
+        <div class="col-sm-6">
+          <%= f.text_field :remarks, autofocus: true, :class => 'form-control', :placeholder => "Enter transaction remarks", class: 'form-control'%>
+        </div>
+      </div>
+      <br/>
+
+      <div class="actions">
+        <%= f.submit "Pay Now!", :class => 'btn btn-primary col-md-offset-4 col-md-4' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+$('#aadhaar_submit').click(function(){
+  $('#hidden_aadhaar_number').val($('#user_aadhaar_number').val());
+  $('#aadhaar_form').hide(1000);
+  $('#payment_form').show(1000);
+});
+</script>

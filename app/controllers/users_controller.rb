@@ -17,10 +17,10 @@ class UsersController < ApplicationController
     otp = params["user"]["otp"]
     pincode = params["user"]["pincode"]
     password = params["user"]["password"]
-    response = agent.post("https://ac.khoslalabs.com/hackgate/hackathon/kyc/raw",{"consent" => "Y", "auth-capture-request" => {"aadhaar-id" => aadhaar_number,"modality" => "otp","otp" => otp,"certificate-type" => "preprod","device-id" => "public","location" => {"type" => "pincode","pincode" => pincode}}}.to_json,{'Content-Type' => 'application/json'})
+    response = verify_otp({"aadhaar_number" => aadhaar_number, "otp" => otp, "pincode" => pincode})
     details = Hash.new
     debugger
-    if response
+    if response && JSON.parse(response.body)["success"]
       res = JSON.parse(response.body)["kyc"]
       details = {:aadhar_number => aadhaar_number,
         :name => res['poi']['name'],
@@ -34,9 +34,9 @@ class UsersController < ApplicationController
         #{res['poa']['vtc']},#{res['poa']['subdist']},#{res['poa']['dist']},#{res['poa']['state']},#{res['poa']['pc']}."
       }
       @user = User.create(details)
-      @user.password = password
-      Wallet.create(:owner_id => @user.id, :type => 'individual', :balance => 0) if @user
+      Wallet.create(:owner_id => @user.id,  :balance => 0) if @user.id
     end
+    sign_in(@user)
     redirect_to "/user/#{@user.id}"
   end
 

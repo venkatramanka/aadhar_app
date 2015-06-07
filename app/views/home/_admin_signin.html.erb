@@ -6,7 +6,7 @@ $(document).ready(function(){
     rules: {
     "store[name]": {required: true},
     "store[email]": {required: true, email: true},
-    "store[password]": {required: true, minlength: 8},
+    "store[password]": {required: true, minlength: 8}
     // "store[password_confirmation]": {required: true, equalTo: "#store_password"}
     }
   });
@@ -21,7 +21,7 @@ $(document).ready(function(){
       </div>
       <div class="modal-body">
         <div id="store_signin_form" class="row">
-          <%= form_for(:store, :url => login_path(:store), :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+          <%= form_for(:store, :url => store_session_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
             <%= f.text_field :email, :class => 'form-control', :placeholder => "Enter your email" %>
             <br/>
             <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your password" %>
@@ -30,7 +30,7 @@ $(document).ready(function(){
           <% end %>
         </div>
         <div id="store_signup_form" class="row">
-          <%= form_for(:store, url: store_registration_path(:store), :html => {:id => "new_store", :class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+          <%= form_for(:store, url: store_signup_path, :html => {:id => "new_store", :class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
             <div class="field">
               <%= f.text_field :name, :class => 'form-control', :placeholder => "Enter your Store Name" %><br/>
             </div>
@@ -39,13 +39,15 @@ $(document).ready(function(){
             </div>
 
             <div class="field">
-              <em>(8 characters minimum)</em>
+              <% if @validatable %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
               <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Enter a password' %><br/>
             </div>
-<!-- 
+
             <div class="field">
-              f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirm your password' 
-            </div> -->
+              <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirm your password' %>
+            </div>
             <br/>
             <div class="actions">
               <%= f.submit "Sign up", :class => 'btn btn-primary col-md-offset-4 col-md-4' %>

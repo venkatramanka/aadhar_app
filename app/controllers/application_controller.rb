@@ -9,23 +9,30 @@ class ApplicationController < ActionController::Base
     resource.is_a?(User) ? "/user/#{resource.id}" : "/store/#{resource.id}"
   end
 
-  def store_signup
-    details = { :name => params["store"]["name"],
-      :email => params["store"]["email"],
-      :password => Digest::MD5.hexdigest(params["store"]["password"]),
-      :verified => false
-    }
-    @store = Store.create(details)
-    redirect_to "/store/#{@store.id}"
-  end
-
   def dispatch_otp
-  	agent = Mechanize.new
-  	x = agent.post("https://ac.khoslalabs.com/hackgate/hackathon/otp",
-  		{"aadhaar-id" => params["user"]["aadhaar_number"],
-  			"channel" => "SMS",
-  			"location" => {"type" => "pincode", "pincode" => "666666" }}.to_json,
-  			{'Content-Type' => 'application/json'})
+    send_otp(params["user"]["aadhaar_number"])
   	render :nothing => true
   end
+
+  def send_otp(aadhaar_number)
+    agent = Mechanize.new
+    x = agent.post("https://ac.khoslalabs.com/hackgate/hackathon/otp",
+      {"aadhaar-id" => aadhaar_number,
+        "channel" => "SMS",
+        "location" => {"type" => "pincode", "pincode" => "666666" }}.to_json,
+        {'Content-Type' => 'application/json'})
+  end
+
+  def verify_otp(hash)
+    agent = Mechanize.new
+    agent.post("https://ac.khoslalabs.com/hackgate/hackathon/kyc/raw",{"consent" => "Y",
+      "auth-capture-request" => {"aadhaar-id" => hash["aadhaar_number"],
+          "modality" => "otp","otp" => hash["otp"],
+          "certificate-type" => "preprod",
+          "device-id" => "public",
+          "location" => {"type" => "pincode","pincode" => hash["pincode"]}
+        }
+      }.to_json,{'Content-Type' => 'application/json'})
+  end
+
 end

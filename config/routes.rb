@@ -7,12 +7,13 @@ AadharApp::Application.routes.draw do
   resources :users, :only => [:update]
   match "users/form/:id" => "users#form"
   match "user/update/:id" => "users#update"
-  match "store/update/:id" => "store#update"
+  match "store/update/:id" => "stores#update"
   match "user/:id" => "users#show", as: "user"
-  match "store/:id" => "store#show", as: "store"
-  match "payment" => "store#payment", as: "payment"
+  match "store/:id" => "stores#show", as: "store"
+  match "payment" => "stores#payment", as: "payment"
   match "home/transfer" => "home#transfer", as: "transfer"
   match "home/transaction" => "home#transaction", as: "do_transaction"
+
   get "users/index"
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,7 +67,7 @@ AadharApp::Application.routes.draw do
   root :to => 'home#index'
   match 'users/login' => 'users#login', :as => "login"
   match 'users/signup' => 'users#signup', :as => "registration"
-  match '/store-signup' => 'application#store_signup', :as => "store_registration"
+  match '/store-signup' => 'stores#store_signup', :as => "store_signup"
   match '/dispatch-otp' => 'application#dispatch_otp', :as => "dispatch_otp"
 
   # See how all your routes lay out with "rake routes"

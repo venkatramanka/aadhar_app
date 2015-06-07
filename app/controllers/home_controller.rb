@@ -1,4 +1,11 @@
 class HomeController < ApplicationController
+
+  before_filter :init_gon, only: [:index]
+
+  def init_gon
+    gon.auth_failure = flash[:error]
+  end
+
   def index
   end
 

@@ -1,3 +1,8 @@
+  <script type="text/javascript">
+    if(gon.auth_failure == true){
+        alert("Please login again");
+    }
+  </script>
 <div id="home_page">
 <%= render :partial => 'slidebar_left' %>
 <%= render :partial => 'producer_signin' %>
@@ -30,22 +35,22 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-<!--  end navbar --> 
+<!--  end navbar -->
 </div>
 <script>
         $(document).ready(function(){
             $('#transfer_link').click( function() {
                 var myHref = "<%= transfer_path %>";
                 $.colorbox({
-                    width: "auto", 
-                    height: "auto", 
-                    //iframe: true, 
+                    width: "auto",
+                    height: "auto",
+                    //iframe: true,
                     href: myHref,
                     closeButton: false,
                     overlayClose: false,
                     opacity:1,
                     scrolling: false
-                });             
+                });
             });
         });
         $('#cbox').blur(function(el){
