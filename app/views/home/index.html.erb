@@ -1,6 +1,31 @@
   <script type="text/javascript">
     if(gon.auth_failure == true){
-        alert("Please login again");
+      $.colorbox({
+        width: "auto",
+        height: "auto",
+        //iframe: true,
+        href: "<%= error_message_path({:text => 'Login Failed. Please Try Again !' }) %>",
+        closeButton: false,
+        overlayClose: false,
+        opacity:1,
+        scrolling: false,
+        height: "40%",
+        width: "40%"
+      });
+    }
+    if(gon.transfer ==true){
+      $.colorbox({
+        width: "auto",
+        height: "auto",
+        //iframe: true,
+        href: "<%= error_message_path({:text => @status }) %>",
+        closeButton: false,
+        overlayClose: false,
+        opacity:1,
+        scrolling: false,
+        height: "40%",
+        width: "40%"
+      });
     }
   </script>
 <div id="home_page">

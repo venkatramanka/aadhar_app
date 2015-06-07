@@ -9,7 +9,12 @@ class ApplicationController < ActionController::Base
     resource.is_a?(User) ? "/user/#{resource.id}" : "/store/#{resource.id}"
   end
 
-  def dispatch_otp
+  def dispatch_otp_transfer
+    send_otp(params["user"]["aadhaar_number"])
+    render :nothing => true
+  end
+
+  def dispatch_otp_create
     send_otp(params["user"]["aadhaar_number"])
   	render :nothing => true
   end

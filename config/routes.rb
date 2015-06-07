@@ -68,8 +68,9 @@ AadharApp::Application.routes.draw do
   match 'users/login' => 'users#login', :as => "login"
   match 'users/signup' => 'users#signup', :as => "registration"
   match '/store-signup' => 'stores#store_signup', :as => "store_signup"
-  match '/dispatch-otp' => 'application#dispatch_otp', :as => "dispatch_otp"
-
+  match '/dispatch-otp' => 'application#dispatch_otp_create', :as => "dispatch_otp"
+  match '/dispatch-otp-transfer' => 'application#dispatch_otp_transfer', :as => "dispatch_otp_transfer"
+  match 'message' => "home#error_message", :as => "error_message"
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

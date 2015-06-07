@@ -19,13 +19,12 @@ class UsersController < ApplicationController
     password = params["user"]["password"]
     response = verify_otp({"aadhaar_number" => aadhaar_number, "otp" => otp, "pincode" => pincode})
     details = Hash.new
-    debugger
     if response && JSON.parse(response.body)["success"]
       res = JSON.parse(response.body)["kyc"]
       details = {:aadhar_number => aadhaar_number,
         :name => res['poi']['name'],
         :dob => res['poi']['dob'],
-        :email => 'notgiven@email.com',
+        :email => params["user"]["email"],
         :gender => res['poi']['gender'],
         :mobile_number => '',
         :password => Digest::MD5.hexdigest(password),
@@ -34,6 +33,11 @@ class UsersController < ApplicationController
         #{res['poa']['vtc']},#{res['poa']['subdist']},#{res['poa']['dist']},#{res['poa']['state']},#{res['poa']['pc']}."
       }
       @user = User.create(details)
+      NotificationMailer.notify(@store.email, "Dear User,
+Welcome to Aadhar e-wallet services. A new account has been created for you connected to your Aaadhar number !!
+
+Regards
+RoobyDoobyDoos")
       Wallet.create(:owner_id => @user.id,  :balance => 0) if @user.id
     end
     sign_in(@user)

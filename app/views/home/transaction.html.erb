@@ -1,1 +1,14 @@
-<div class="alert alert-<%= @class %>" role="alert"><%= @status %></div></br>
+<script type="text/javascript">
+  $.colorbox({
+    width: "auto",
+    height: "auto",
+                    //iframe: true,
+                    href: "<%= error_message_path({:text => @status }) %>",
+                    closeButton: false,
+                    overlayClose: false,
+                    opacity:1,
+                    scrolling: false,
+                    height: "40%",
+                    width: "40%"
+                });
+</script>

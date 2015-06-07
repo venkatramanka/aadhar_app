@@ -3,6 +3,14 @@ $(document).ready(function(){
   $('#signup_form').hide();
   $('#aadhaar_form').hide();
   $('#signin_link').hide();
+  $("#new_user").validate({
+    rules: {
+    "user[otp]": {required: true},
+    "user[pincode]": {required: true},
+    "user[email]": {required: true, email: true},
+    "user[password]": {required: true, minlength: 8}
+    }
+  });
 });
 </script>
 <div id="loginModal" class="modal fade"  role="dialog" aria-labelledby="Signin" aria-hidden="true" data-backdrop="static" data-keyboard="false" tabindex="-1" style="z-index:99999">
@@ -33,13 +41,17 @@ $(document).ready(function(){
           <% end %>
         </div>
         <div id="signup_form" class="row">
-          <%= form_for(:user, url: registration_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+          <%= form_for(:user, url: registration_path, :html => {:id => "new_user", :class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
             <div class="field">
               <%= f.text_field :otp, :class => 'form-control', :placeholder => "Enter your OTP" %><br/>
             </div>
             <%= f.hidden_field :hidden_aadhaar_number, :id => 'hidden_aadhaar_number' %>
             <div class="field">
               <%= f.text_field :pincode, autofocus: true, :class => 'form-control', :placeholder => 'Enter your pincode as recorded in your Aadhaar' %><br/>
+            </div>
+
+            <div class="field">
+              <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Enter your email' %><br/>
             </div>
 
             <div class="field">

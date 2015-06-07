@@ -6,11 +6,12 @@ function showOTPForm(){
 	$('#hidden_amount').val($('#user_transfer_amount').val());
 	$('#display_transfer_container').hide(500);
 	$('#transfer_container').show(500);
+	$("#transfer_form").submit();
 }
 </script>
 <div id="cbox" style="background-color: rgba(29,29,29,0.8);padding-top:2vh; display:flex;">
 	<div id="display_transfer_container">
-		<%= form_for(:user, url: dispatch_otp_path, :remote => true, :html => {:class => 'form-group', style: "padding:2vh"}) do |f| %>
+		<%= form_for(:user, url: dispatch_otp_transfer_path, :remote => true, :html => {:id => "transfer_form",:class => 'form-group', style: "padding:2vh"}) do |f| %>
 		    <div class="field">
 		    	<%= f.label :to, class: 'col-sm-2 control-label', style: 'color:white'  %>
 		      <%= f.text_field :to_aadhaar, :class => 'form-control temp', :placeholder => "Enter TO Aadhaar number" %><br/>
@@ -23,8 +24,8 @@ function showOTPForm(){
 		    	<%= f.label :amount, class: 'col-sm-2 control-label', style: 'color:white'  %>
 		      <%= f.text_field :transfer_amount, :class => 'form-control', :placeholder => "Enter transfer amount" %><br/>
 		    </div>
-			<div class="actions" style="padding-bottom:2vh">
-		      <%= f.submit "Confirm", :class => 'btn btn-primary col-md-offset-4 col-md-4', :id => 'aadhaar_submit', :onclick => 'showOTPForm()' %>
+		    <div class="field" style="padding-bottom:2vh;">
+		      <%= link_to "OK","#", :class => 'btn btn-primary col-md-offset-4 col-md-4', :onclick => "showOTPForm()" %>
 		    </div>
 		<% end %>
 	</div>
