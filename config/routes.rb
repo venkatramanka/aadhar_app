@@ -11,7 +11,8 @@ AadharApp::Application.routes.draw do
   match "user/:id" => "users#show", as: "user"
   match "store/:id" => "store#show", as: "store"
   match "payment" => "store#payment", as: "payment"
-
+  match "home/transfer" => "home#transfer", as: "transfer"
+  match "home/transaction" => "home#transaction", as: "do_transaction"
   get "users/index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

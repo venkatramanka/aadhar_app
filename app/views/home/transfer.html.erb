@@ -1,0 +1,54 @@
+<script>
+$('#transfer_container').hide();
+function showOTPForm(){
+	$('#hidden_from').val($('.temp').val());
+	$('#hidden_to').val($('#user_to_aadhaar').val());
+	$('#hidden_amount').val($('#user_transfer_amount').val());
+	$('#display_transfer_container').hide(500);
+	$('#transfer_container').show(500);
+}
+</script>
+<div id="cbox" style="background-color: rgba(29,29,29,0.8);padding-top:2vh; display:flex;">
+	<div id="display_transfer_container">
+		<%= form_for(:user, url: dispatch_otp_path, :remote => true, :html => {:class => 'form-group', style: "padding:2vh"}) do |f| %>
+		    <div class="field">
+		    	<%= f.label :to, class: 'col-sm-2 control-label', style: 'color:white'  %>
+		      <%= f.text_field :to_aadhaar, :class => 'form-control temp', :placeholder => "Enter TO Aadhaar number" %><br/>
+		    </div>
+		    <div class="field">
+		    	<%= f.label :from, class: 'col-sm-2 control-label', style: 'color:white'  %>
+		      <%= f.text_field :aadhaar_number, :class => 'form-control', :placeholder => "Enter FROM Aadhaar number" %><br/>
+		    </div>
+		    <div class="field">
+		    	<%= f.label :amount, class: 'col-sm-2 control-label', style: 'color:white'  %>
+		      <%= f.text_field :transfer_amount, :class => 'form-control', :placeholder => "Enter transfer amount" %><br/>
+		    </div>
+			<div class="actions" style="padding-bottom:2vh">
+		      <%= f.submit "Confirm", :class => 'btn btn-primary col-md-offset-4 col-md-4', :id => 'aadhaar_submit', :onclick => 'showOTPForm()' %>
+		    </div>
+		<% end %>
+	</div>
+
+	<div id="transfer_container">
+		<%= form_for(:transaction, :url => do_transaction_path, :html => {:class => 'form-group', :style => 'padding:2vh'}) do |f| %>
+	    <%= f.hidden_field :from, :class => 'form-control', :id => 'hidden_from' %>
+	    <%= f.hidden_field :to, :class => 'form-control', :id => 'hidden_to' %>
+	    <%= f.hidden_field :amount, :class => 'form-control', :id => 'hidden_amount' %>
+	    <div class="field">
+	    	<%= f.label :enter_otp, class: 'col-sm-4 control-label', style: 'color:white'  %>
+	      <%= f.text_field :otp, :class => 'form-control', :placeholder => "Enter your OTP" %><br/>
+	    </div>
+	    <div class="field">
+	    	<%= f.label :pincode, class: 'col-sm-4 control-label', style: 'color:white'  %>
+	      <%= f.text_field :pincode, :class => 'form-control', :placeholder => "Enter your Aadhar card pincode" %><br/>
+	    </div>
+	    <div class="field">
+	    	<%= f.label :remarks, class: 'col-sm-4 control-label', style: 'color:white'  %>
+	      <%= f.text_field :remarks, :class => 'form-control', :placeholder => "Enter remarks (optional)" %><br/>
+	    </div>
+	    <%= f.submit 'Send', :class => 'btn btn-primary col-md-offset-4 col-md-4', :style => 'padding-bottom:1vh' %>
+	  <% end %>
+	</div>
+<a href="#" onclick="javascript:$('#colorbox').remove()"><p style="color:grey;position:absolute;right:1vh;top:0.5vh">X</p></a>
+</div>
+
