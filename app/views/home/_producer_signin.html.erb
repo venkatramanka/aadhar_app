@@ -18,8 +18,6 @@ $(document).ready(function(){
             <%= f.text_field :login_aadhaar_number, :class => 'form-control', :placeholder => "Enter your Aadhaar number" %>
             <br/>
             <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your password" %>
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
             <br/>
             <%= f.submit 'Sign in', :class => 'btn btn-primary col-md-offset-4 col-md-4' %>
           <% end %>

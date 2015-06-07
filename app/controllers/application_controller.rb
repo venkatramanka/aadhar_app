@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   		  :email => '',
   		  :gender => res['poi']['gender'],
   		  :mobile_number => '',
-  		  :password => password,
+  		  :password => Digest::MD5.hexdigest(password),
   		  :address => "#{res['poa']['house']},#{res['poa']['street']},#{res['poa']['lm']},#{res['poa']['po']},
   		  #{res['poa']['vtc']},#{res['poa']['subdist']},#{res['poa']['dist']},#{res['poa']['state']},#{res['poa']['pc']}."
   		}
@@ -35,6 +35,15 @@ class ApplicationController < ActionController::Base
       Wallet.create(:owner_id => @user.id, :type => 'individual', :balance => 0) if @user
   	end
   	redirect_to "/user/#{@user.id}"
+  end
+
+  def store_signup
+    details = { :name => params["store"]["name"],
+      :email => params["store"]["email"],
+      :password => Digest::MD5.hexdigest(params["store"]["password"])
+    }
+    @store = Store.create(details)
+    redirect_to "/store/#{@store.id}"
   end
 
   def dispatch_otp

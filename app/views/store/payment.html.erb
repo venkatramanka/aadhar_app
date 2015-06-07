@@ -1,0 +1,22 @@
+<%= form_tag("/payment", method: "post") do %>
+
+<div class="form-group">
+  <%= label_tag :aadhar, "Aadhar Number:", class: 'col-sm-2 control-label' %>
+  <div class="col-sm-6">
+    <%= text_field_tag :aadhar, "Enter Customers Aadhar", class: 'form-control'%>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= label_tag :amount, "Bill Amount:", class: 'col-sm-2 control-label' %>
+  <div class="col-sm-6">
+    <%= text_field_tag :amount, "Enter total bill amount", class: 'form-control'%>
+  </div>
+</div>
+
+<div class="form-group">
+    <div class="col-sm-offset-1 col-sm-6">
+      <%= submit_tag("Request OTP", class: "btn btn-primary") %>
+    </div>
+</div>
+<% end %>

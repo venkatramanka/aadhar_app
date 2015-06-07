@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150606053219) do
+ActiveRecord::Schema.define(:version => 20150606150304) do
 
   create_table "store_categories", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20150606053219) do
     t.string   "password"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "verified"
   end
 
   create_table "user_transactions", :force => true do |t|
@@ -52,6 +53,19 @@ ActiveRecord::Schema.define(:version => 20150606053219) do
     t.text     "remarks"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "aadhar_number"
+    t.string   "name"
+    t.string   "gender"
+    t.date     "dob"
+    t.text     "address"
+    t.string   "mobile_number"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "wallets", :force => true do |t|

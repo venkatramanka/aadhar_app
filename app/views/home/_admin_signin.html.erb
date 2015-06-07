@@ -1,12 +1,61 @@
-<div id="adminLoginModal" class="modal fade"  role="dialog" aria-labelledby="Signin" aria-hidden="true" data-backdrop="static" data-keyboard="false" tabindex="-1" style="z-index:99999">
+<script>
+$(document).ready(function(){
+  $('#store_signup_form').hide();
+  $('#store_signin_link').hide();
+  $("#new_store").validate({
+    rules: {
+    "store[name]": {required: true},
+    "store[email]": {required: true, email: true},
+    "store[password]": {required: true, minlength: 8},
+    // "store[password_confirmation]": {required: true, equalTo: "#store_password"}
+    }
+  });
+});
+</script>
+<div id="StoreloginModal" class="modal fade"  role="dialog" aria-labelledby="Signin" aria-hidden="true" data-backdrop="static" data-keyboard="false" tabindex="-1" style="z-index:99999">
   <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 id="form_type_text" class="text-center" style="color:dodgerblue">About Us !</h4>
+          <h4 id="form_text" class="text-center" style="color:dodgerblue">Signin</h4>
       </div>
       <div class="modal-body">
-        <iframe width="640" height="401" src="http://www.powtoon.com/embed/fM9IVWd1erK/" frameborder="0"></iframe>
+        <div id="store_signin_form" class="row">
+          <%= form_for(:store, :url => login_path(:store), :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+            <%= f.text_field :email, :class => 'form-control', :placeholder => "Enter your email" %>
+            <br/>
+            <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your password" %>
+            <br/>
+            <%= f.submit 'Sign in', :class => 'btn btn-primary col-md-offset-4 col-md-4' %>
+          <% end %>
+        </div>
+        <div id="store_signup_form" class="row">
+          <%= form_for(:store, url: store_registration_path(:store), :html => {:id => "new_store", :class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+            <div class="field">
+              <%= f.text_field :name, :class => 'form-control', :placeholder => "Enter your Store Name" %><br/>
+            </div>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true, :class => 'form-control', :placeholder => 'Enter your email' %><br/>
+            </div>
+
+            <div class="field">
+              <em>(8 characters minimum)</em>
+              <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Enter a password' %><br/>
+            </div>
+<!-- 
+            <div class="field">
+              f.password_field :password_confirmation, autocomplete: "off", :class => 'form-control', :placeholder => 'Confirm your password' 
+            </div> -->
+            <br/>
+            <div class="actions">
+              <%= f.submit "Sign up", :class => 'btn btn-primary col-md-offset-4 col-md-4' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "New user? Signup", "#", :id => 'store_signup_link', :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#store_signin_form").hide(1000);$("#store_signup_form").show(1000);$("#form_text").text("Signup");$(this).hide();$("#store_signin_link").show()' %>
+        <%= link_to "Have an account? Signin", "#", :id => "store_signin_link", :style => 'position:absolute;right:1vw; bottom:1vh;', :onclick => '$("#store_signin_form").show(1000);$("#store_signup_form").hide(1000);$("#form_text").text("Signin");$(this).hide();$("#store_signup_link").show()' %>
       </div>
   </div>
   </div>

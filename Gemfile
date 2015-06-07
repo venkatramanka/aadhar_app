@@ -21,7 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'jquery-validation-rails'
 gem 'gmaps4rails'
 gem 'devise'
 gem 'mechanize'
