@@ -1,4 +1,9 @@
 AadharApp::Application.routes.draw do
+
+  devise_for :stores
+
+  devise_for :users
+
   resources :users, :only => [:update]
   match "users/form/:id" => "users#form"
   match "user/:id" => "users#show", as: "user"
@@ -56,8 +61,8 @@ AadharApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'home#index'
-  match '/login' => 'application#login', :as => "login"
-  match '/signup' => 'application#signup', :as => "registration"
+  match 'users/login' => 'users#login', :as => "login"
+  match 'users/signup' => 'users#signup', :as => "registration"
   match '/store-signup' => 'application#store_signup', :as => "store_registration"
   match '/dispatch-otp' => 'application#dispatch_otp', :as => "dispatch_otp"
 

@@ -24,10 +24,8 @@
               </a>
             </li>
             <li>
-                <a href="javascript:window.location='/'">
-                    <i class="pe-7s-power"></i>
-                    <p>Logout</p>
-                </a>
+              <i class="pe-7s-power"></i>
+              <%=link_to :Logout, destroy_user_session_path, method: :delete %>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->

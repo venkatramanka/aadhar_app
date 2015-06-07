@@ -14,8 +14,8 @@ $(document).ready(function(){
       </div>
       <div class="modal-body">
         <div id="signin_form" class="row">
-          <%= form_for(:user, :url => login_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
-            <%= f.text_field :login_aadhaar_number, :class => 'form-control', :placeholder => "Enter your Aadhaar number" %>
+          <%= form_for(:user, :url => user_session_path, :html => {:class => 'form-group col-md-offset-2 col-md-8'}) do |f| %>
+            <%= f.text_field :aadhar_number, :class => 'form-control', :placeholder => "Enter your Aadhaar number" %>
             <br/>
             <%= f.password_field :password, :class => 'form-control', :placeholder => "Enter your password" %>
             <br/>
