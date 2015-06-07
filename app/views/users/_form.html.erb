@@ -1,30 +1,30 @@
-<%= form_for(@user, url: "#{@user.id}", html: { method: 'PUT', class: 'form-horizontal', style: 'padding-top:1vh; background-color: rgba(59,59,59,0.9);display: flex;' }) do |f| %>
+<%= form_for(@user, url: "update/#{@user.id}", html: { method: 'PUT', class: 'form-horizontal' }) do |f| %>
 
     <div class="col-md-12">
 
   	  <div class="form-group">
-        <%= f.label :aadhar_number, class: 'col-sm-2 control-label', style: 'color:white'  %>
+        <%= f.label :aadhar_number, class: 'col-sm-2 control-label' %>
         <div class="col-sm-8">
           <%= f.text_field :aadhar_number, autofocus: true, class: 'form-control'  %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :name, class: 'col-sm-2 control-label', style: 'color:white'  %>
+        <%= f.label :name, class: 'col-sm-2 control-label' %>
         <div class="col-sm-8">
             <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :dob, class: 'col-sm-2 control-label', style: 'color:white'  %>
+        <%= f.label :dob, class: 'col-sm-2 control-label' %>
         <div class="col-sm-8">
           <%= f.date_select :dob, class: 'form-control'  %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= f.label :address, class: 'col-sm-2 control-label', style: 'color:white'  %>
+        <%= f.label :address, class: 'col-sm-2 control-label' %>
         <div class="col-sm-8">
           <%= f.text_area :address, rows:8, class: 'form-control', placeholder: '10 digits' %>
         </div>

@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   def store_signup
     details = { :name => params["store"]["name"],
       :email => params["store"]["email"],
-      :password => Digest::MD5.hexdigest(params["store"]["password"])
+      :password => Digest::MD5.hexdigest(params["store"]["password"]),
+      :verified => false
     }
     @store = Store.create(details)
     redirect_to "/store/#{@store.id}"

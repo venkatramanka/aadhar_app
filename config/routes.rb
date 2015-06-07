@@ -6,6 +6,8 @@ AadharApp::Application.routes.draw do
 
   resources :users, :only => [:update]
   match "users/form/:id" => "users#form"
+  match "user/update/:id" => "users#update"
+  match "store/update/:id" => "store#update"
   match "user/:id" => "users#show", as: "user"
   match "store/:id" => "store#show", as: "store"
   match "payment" => "store#payment", as: "payment"
@@ -86,7 +88,7 @@ AadharApp::Application.routes.draw do
 #     "certificate-type": "preprod",
 #     "device-id": "public",
 #     "location":{
-#       "type":"pincode", 
+#       "type":"pincode",
 #       "pincode":"620021"
 #   }
 # }

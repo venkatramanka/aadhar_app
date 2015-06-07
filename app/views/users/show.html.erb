@@ -1,42 +1,5 @@
 <div id="user_dashboard">
-  <div class="alpha60">
-    <script>
-    $.colorbox({href:"/users/form/<%=@user.id%>", transition:"fade", closeButton:false, open:true, left:"1%",scrolling:false});
-    </script>
+  <div class="alpha60 pageCenter">
+    <%= render :partial => 'form' %>
   </div>
 </div>
-<nav class="navbar navbar-ct-blue navbar-fixed-top navbar-transparent" role="navigation" style="background-color:rgba(59,59,59,0.9)">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="pe-7s-credit"></i>
-                        <p>Account</p>
-              </a>
-            </li>
-            <li>
-              <i class="pe-7s-power"></i>
-              <%=link_to :Logout, destroy_user_session_path, method: :delete %>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-<!--  end navbar -->
-<div id="payment_div">
-  <%= form_tag({}, {:method => :get}) do %>
-    <%= select_tag :banks, options_for_select(@banks) %>
-  <% end %>
-</div>
-<script>
-$('#payment_div').hide();
-</script>

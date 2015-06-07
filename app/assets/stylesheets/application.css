@@ -12,4 +12,11 @@
  *= require_self
  *= require_tree .
  */
- 
+.pageCenter {
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  padding-top: 10vh;
+}

@@ -1,4 +1,8 @@
-  <%= form_for(@store, url: "#{@store.id}", html: { method: 'PUT', class: 'form-horizontal' }) do |f| %>
+<div class="pageCenter">
+  <% if @message %>
+    <div class="<%= @class %>" role="alert"><%= @message %></div></br>
+  <% end %>
+  <%= form_for(@store, url: "update/#{@store.id}", html: { method: 'PUT', class: 'form-horizontal' }) do |f| %>
 
   <div class="col-md-6">
 
@@ -7,78 +11,74 @@
       <div class="col-sm-6">
         <%= f.text_field :name, autofocus: true, class: 'form-control'  %>
       </div>
+
+      <div class="form-group">
+        <%= f.label :email, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.email_field :email, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :phone, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :phone, class: 'form-control', placeholder: '10 digits' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.collection_select :category_id, StoreCategory.all, :id, :name, {}, { multiple: true, class: 'form-control' } %>
+        </div>
+      </div>
+
     </div>
 
+    <div class="col-md-6" style="border-left:1px solid grey">
+
+
+      <div class="form-group">
+        <%= f.label :address_line_1, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :line_1, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address_line_2, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :line_2, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :city, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :state, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :pincode, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.text_field :pincode, class: 'form-control'  %>
+        </div>
+      </div>
+
+    </div>
     <div class="form-group">
-      <%= f.label :email, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.email_field :email, class: 'form-control'  %>
+      <div class="col-sm-offset-1 col-sm-6">
+        <%= f.submit "Update  Profile", class: "btn btn-primary" %>
       </div>
     </div>
-
-    <div class="form-group">
-      <%= f.label :phone, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :phone, class: 'form-control', placeholder: '10 digits' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :category, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.collection_select :category_id, StoreCategory.all, :id, :name, {}, { multiple: true, class: 'form-control' } %>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-md-6" style="border-left:1px solid grey">
-
-
-    <div class="form-group">
-      <%= f.label :address_line_1, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :line_1, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :address_line_2, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :line_2, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :city, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :city, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :state, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :state, class: 'form-control'  %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :pincode, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-        <%= f.text_field :pincode, class: 'form-control'  %>
-      </div>
-    </div>
-
-  </div>
-
-
-
-  <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-6">
-      <%= f.submit "Update  Profile", class: "btn btn-primary" %>
-    </div>
-  </div>
   <%end%>
-
+</div>
 
