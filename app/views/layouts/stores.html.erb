@@ -29,9 +29,15 @@
       <li>
         <a href="/store/<%= current_store.id %>" onclick = $("#menu-close").click(); >Home</a>
       </li>
+      <% if current_store.profile_incomplete? %>
+      <li>
+        <a href="#" onclick = "alert('Complete profile to use payment')"; >Payment</a>
+      </li>
+      <%else%>
       <li>
         <a href="/payment" onclick = $("#menu-close").click(); >Payment</a>
       </li>
+      <% end %>
       <% if true %>
       <li>
         <%= link_to("Logout", destroy_store_session_path, method: "DELETE")%>
